@@ -3,14 +3,11 @@ package project.expenseincomeproject.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
-
 @Data
-public class IncomeResponseDto {
+public class ExpenseRequestDto {
     private String name;
     private Double amount;
     private LocalDate date;
-    private String incomeCategoryName;
-    private String username;
-
-
+    private String expenseCategoryName;
+    private String userName;
 }

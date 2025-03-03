@@ -1,51 +1,54 @@
 package project.expenseincomeproject.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import project.expenseincomeproject.dto.ExpenseRequestDto;
+import project.expenseincomeproject.dto.ExpenseResponseDto;
+import project.expenseincomeproject.service.ExpenseService;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/expenses")
+@RequiredArgsConstructor
 public class ExpenseController {
 
-    /*@Autowired
-    private ExpenseService expenseService;
+    private final ExpenseService expenseService;
 
-    @PostMapping
-    public ResponseEntity<Expense> addExpense(@RequestBody Expense expense, @AuthenticationPrincipal User user) {
-        expense.setUser(user);
-        return ResponseEntity.ok(expenseService.save(expense));
+    @PostMapping("/add")
+    public ResponseEntity<ExpenseResponseDto> addExpense(@RequestBody ExpenseRequestDto expenseRequestDto) {
+        ExpenseResponseDto expenseResponseDto = expenseService.addExpense(expenseRequestDto);
+        return ResponseEntity.ok(expenseResponseDto);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Expense>> getAllExpenses(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(expenseService.getAllByUser(user));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Expense> updateExpense(@PathVariable Long id, @RequestBody Expense expense) {
-        return ResponseEntity.ok(expenseService.update(id, expense));
+    @PutMapping("/update/{id}")
+    public ResponseEntity<ExpenseResponseDto> updateExpense(@PathVariable Long id, @RequestBody ExpenseRequestDto expenseRequestDto) {
+        ExpenseResponseDto expenseResponseDto = expenseService.updateExpense(id, expenseRequestDto);
+        return ResponseEntity.ok(expenseResponseDto);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteExpense(@PathVariable Long id) {
-        expenseService.delete(id);
+        expenseService.deleteExpense(id);
         return ResponseEntity.noContent().build();
     }
 
-    // a. Hansısa xərc kateqoriyasında olan xərcləri iki tarix aralığında qaytarmaq
-    @GetMapping("/category/{categoryId}")
-    public ResponseEntity<List<Expense>> getExpensesByCategoryAndDateRange(
-            @PathVariable Long categoryId,
-            @RequestParam LocalDateTime startDate,
-            @RequestParam LocalDateTime endDate) {
-        return ResponseEntity.ok(expenseService.getByCategoryAndDateRange(categoryId, startDate, endDate));
-    }
-
-    // b. Xərc kateqoriyası filtri olmadan, sadəcə iki tarix aralığında olan xərcləri qaytarmaq
-    @GetMapping("/date-range")
-    public ResponseEntity<List<Expense>> getExpensesByDateRange(
+    @GetMapping("/category-and-date-range/{categoryName}")
+    public ResponseEntity<List<ExpenseResponseDto>> getExpensesByCategoryAndDateRange(
+            @PathVariable String categoryName,
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate) {
-        return ResponseEntity.ok(expenseService.getByDateRange(startDate, endDate));
-    }*/
+        List<ExpenseResponseDto> expenses = expenseService.getExpensesByCategoryNameAndDateRange(categoryName, startDate, endDate);
+        return ResponseEntity.ok(expenses);
+    }
+
+    @GetMapping("/date-range")
+    public ResponseEntity<List<ExpenseResponseDto>> getExpensesByDateRange(
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+        List<ExpenseResponseDto> expenses = expenseService.getExpensesByDateRange(startDate, endDate);
+        return ResponseEntity.ok(expenses);
+    }
 }

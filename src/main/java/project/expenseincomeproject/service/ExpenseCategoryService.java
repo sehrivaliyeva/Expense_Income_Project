@@ -25,13 +25,23 @@ public class ExpenseCategoryService {
 
     public ExpenseCategory update(Long id, ExpenseCategory updatedCategory) {
         Optional<ExpenseCategory> optionalCategory = expenseCategoryRepository.findById(id);
+
         if (optionalCategory.isPresent()) {
             ExpenseCategory existingCategory = optionalCategory.get();
+
+            // Güncellenmek istenen kategori adı zaten başka bir kategoride varsa hata fırlat
+            if (expenseCategoryRepository.existsByExpenseCategoryName(updatedCategory.getExpenseCategoryName())
+                    && !existingCategory.getExpenseCategoryName().equals(updatedCategory.getExpenseCategoryName())) {
+                throw new RuntimeException("Expense Category with name '" + updatedCategory.getExpenseCategoryName() + "' already exists.");
+            }
+
             existingCategory.setExpenseCategoryName(updatedCategory.getExpenseCategoryName());
             return expenseCategoryRepository.save(existingCategory);
         }
+
         throw new RuntimeException("Expense Category not found with id: " + id);
     }
+
 
     public void delete(Long id) {
         if (!expenseCategoryRepository.existsById(id)) {

@@ -11,4 +11,5 @@ import java.util.Optional;
 public interface IncomeCategoryRepository extends JpaRepository<IncomeCategory, Long> {
     Optional<IncomeCategory> findByIncomeCategoryName(String incomeCategoryName);
 
+    boolean existsByIncomeCategoryName(String incomeCategoryName);
 }

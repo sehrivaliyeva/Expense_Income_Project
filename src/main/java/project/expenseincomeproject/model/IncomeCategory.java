@@ -1,5 +1,6 @@
 package project.expenseincomeproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,13 +19,11 @@ public class IncomeCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(nullable = false, unique = true)
     private String incomeCategoryName;
-
-    @OneToMany(mappedBy = "incomeCategory")
-    private List<Income> incomes;
 
 
 

@@ -1,5 +1,6 @@
 package project.expenseincomeproject.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,14 +21,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/incomes")
-
+@RequiredArgsConstructor
 public class IncomeController {
 
-    private  final IncomeService incomeService;
+    private final IncomeService incomeService;
 
-    public IncomeController(IncomeService incomeService) {
-        this.incomeService = incomeService;
-    }
 
     @PostMapping("/add")
     public ResponseEntity<IncomeResponseDto> addIncome(@RequestBody IncomeRequestDto incomeRequestDto) {
@@ -47,12 +45,12 @@ public class IncomeController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/category-and-daterange/{categoryId}")
+    @GetMapping("/category-and-date-range/{categoryName}")
     public ResponseEntity<List<IncomeResponseDto>> getIncomesByCategoryAndDateRange(
-            @PathVariable Long categoryId,
+            @PathVariable String categoryName,
             @RequestParam LocalDate startDate,
             @RequestParam LocalDate endDate) {
-        List<IncomeResponseDto> incomes = incomeService.getIncomesByCategoryAndDateRange(categoryId, startDate, endDate);
+        List<IncomeResponseDto> incomes = incomeService. getIncomesByCategoryNameAndDateRange(categoryName, startDate, endDate);
         return ResponseEntity.ok(incomes);
     }
 

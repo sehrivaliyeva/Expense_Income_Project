@@ -24,6 +24,7 @@ public class IncomeMapper {
 
     public Income toIncome(IncomeRequestDto incomeRequestDto) {
         Income income = new Income();
+        income.setName(incomeRequestDto.getName());
         income.setAmount(incomeRequestDto.getAmount());
         income.setDate(incomeRequestDto.getDate());
 
@@ -46,6 +47,7 @@ public class IncomeMapper {
 
     public IncomeResponseDto toIncomeResponseDto(Income income) {
         IncomeResponseDto dto = new IncomeResponseDto();
+        dto.setName(income.getName());
         dto.setAmount(income.getAmount());
         dto.setDate(income.getDate());
         dto.setUsername(income.getUser().getUsername());  // Username

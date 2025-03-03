@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import project.expenseincomeproject.model.ExpenseCategory;
 import project.expenseincomeproject.service.ExpenseCategoryService;
 
-
 import java.util.List;
 
 @RestController
