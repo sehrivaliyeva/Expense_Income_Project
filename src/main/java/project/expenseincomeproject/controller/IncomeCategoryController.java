@@ -17,7 +17,7 @@ import project.expenseincomeproject.service.IncomeCategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/income-categories")
+@RequestMapping("/v1/income-categories")
 @RequiredArgsConstructor
 public class IncomeCategoryController {
 

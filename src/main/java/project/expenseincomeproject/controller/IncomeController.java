@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/incomes")
+@RequestMapping("/v1/incomes")
 @RequiredArgsConstructor
 public class IncomeController {
 

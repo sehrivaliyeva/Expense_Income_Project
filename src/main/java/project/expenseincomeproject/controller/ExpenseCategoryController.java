@@ -16,7 +16,7 @@ import project.expenseincomeproject.service.ExpenseCategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/expense-categories")
+@RequestMapping("/v1/expense-categories")
 public class ExpenseCategoryController {
 
     @Autowired
