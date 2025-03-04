@@ -27,7 +27,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User  implements UserDetails {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,18 +42,22 @@ public class User  implements UserDetails {
 
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<IncomeCategory> incomeCategories;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<ExpenseCategory> expenseCategories;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Income> incomes;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Expense> expenses;
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
-
-   /* @OneToMany(mappedBy = "user")
-    private List<BudgetPlan> budgetPlans;*/
 
 
 }

@@ -10,5 +10,5 @@ public class ExpenseResponseDto {
     private Double amount;
     private LocalDate date;
     private String expenseCategoryName;
-    private String username;
+    private String userName;
 }

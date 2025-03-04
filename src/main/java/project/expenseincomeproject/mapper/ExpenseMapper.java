@@ -48,7 +48,7 @@ public class ExpenseMapper {
         dto.setName(expense.getName());
         dto.setAmount(expense.getAmount());
         dto.setDate(expense.getDate());
-        dto.setUsername(expense.getUser().getUsername());  // Username
+        dto.setUserName(expense.getUser().getUsername());  // Username
         dto.setExpenseCategoryName(expense.getExpenseCategory().getExpenseCategoryName());
         return dto;
     }
