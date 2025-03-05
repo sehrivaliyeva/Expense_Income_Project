@@ -5,20 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import project.expenseincomeproject.dto.ExpenseRequestDto;
-import project.expenseincomeproject.dto.ExpenseResponseDto;
 import project.expenseincomeproject.dto.IncomeRequestDto;
 import project.expenseincomeproject.dto.IncomeResponseDto;
 import project.expenseincomeproject.mapper.IncomeMapper;
-import project.expenseincomeproject.model.Expense;
-import project.expenseincomeproject.model.ExpenseCategory;
 import project.expenseincomeproject.model.Income;
 import project.expenseincomeproject.model.IncomeCategory;
 import project.expenseincomeproject.model.User;
 import project.expenseincomeproject.repository.IncomeCategoryRepository;
 import project.expenseincomeproject.repository.IncomeRepository;
 import project.expenseincomeproject.repository.UserRepository;
-
 
 import java.time.LocalDate;
 import java.util.List;
@@ -48,7 +43,6 @@ public class IncomeService {
         if (!username.equals(incomeRequestDto.getUserName())) {
             throw new RuntimeException("You are not authorized");
         }
-
         // Kullanıcıyı veritabanından bul
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -80,37 +74,6 @@ public class IncomeService {
         // Kaydedilen geliri dönüş DTO'suna çevir
         return incomeMapper.toIncomeResponseDto(savedIncome);
     }
-
-    // Gəliri yeniləmək
-   /* public IncomeResponseDto updateIncome(Long id, IncomeRequestDto incomeRequestDto) {
-        String username = getCurrentUsername();
-
-        // Mevcut geliri ID'ye göre al
-        Income existingIncome = incomeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Income not found with id: " + id));
-
-        // Gelir kategorisini al
-        IncomeCategory incomeCategory = incomeCategoryRepository.findByIncomeCategoryName(incomeRequestDto.getIncomeCategoryName())
-                .orElseThrow(() -> new RuntimeException("Income Category not found with name: " + incomeRequestDto.getIncomeCategoryName()));
-
-        // Kullanıcı doğrulaması yap
-        if (!existingIncome.getUser().getUsername().equals(username)) {
-            throw new RuntimeException("You are not authorized to update this income.");
-        }
-
-        // Geliri güncelle
-        existingIncome.setName(incomeRequestDto.getName());
-        existingIncome.setAmount(incomeRequestDto.getAmount());
-        existingIncome.setDate(incomeRequestDto.getDate());
-        existingIncome.setIncomeCategory(incomeCategory);
-
-        // Geliri kaydet
-        Income updatedIncome = incomeRepository.save(existingIncome);
-
-        // Güncellenmiş geliri dönüş DTO'suna çevir
-        return incomeMapper.toIncomeResponseDto(updatedIncome);
-    }*/
-
     public IncomeResponseDto updateIncome(Long id,IncomeRequestDto incomeRequestDto) {
         String username = getCurrentUsername();
 
