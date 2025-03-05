@@ -5,9 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import project.expenseincomeproject.dto.ExpenseRequestDto;
+import project.expenseincomeproject.dto.ExpenseResponseDto;
 import project.expenseincomeproject.dto.IncomeRequestDto;
 import project.expenseincomeproject.dto.IncomeResponseDto;
 import project.expenseincomeproject.mapper.IncomeMapper;
+import project.expenseincomeproject.model.Expense;
+import project.expenseincomeproject.model.ExpenseCategory;
 import project.expenseincomeproject.model.Income;
 import project.expenseincomeproject.model.IncomeCategory;
 import project.expenseincomeproject.model.User;
@@ -161,7 +165,7 @@ public class IncomeService {
     }
 
     // Gəliri yeniləmək
-    public IncomeResponseDto updateIncome(Long id, IncomeRequestDto incomeRequestDto) {
+   /* public IncomeResponseDto updateIncome(Long id, IncomeRequestDto incomeRequestDto) {
         String username = getCurrentUsername();
 
         // Mevcut geliri ID'ye göre al
@@ -187,6 +191,45 @@ public class IncomeService {
         Income updatedIncome = incomeRepository.save(existingIncome);
 
         // Güncellenmiş geliri dönüş DTO'suna çevir
+        return incomeMapper.toIncomeResponseDto(updatedIncome);
+    }*/
+
+    public IncomeResponseDto updateIncome(Long id,IncomeRequestDto incomeRequestDto) {
+        String username = getCurrentUsername();
+
+        // Check if the logged-in user is authorized to update the expense
+        if (!username.equals(incomeRequestDto.getUserName())) {
+            throw new RuntimeException("You are not authorized to update expense for this user.");
+        }
+
+        // Retrieve the existing expense by its ID
+        Income existingIncome = incomeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+
+        // Check if the logged-in user is the owner of the existing expense
+        if (!existingIncome.getUser().getUsername().equals(username)) {
+            throw new RuntimeException("You are not authorized to update this expense.");
+        }
+
+        // Fetch the ExpenseCategory from the repository
+       IncomeCategory incomeCategory = incomeCategoryRepository.findByIncomeCategoryName(incomeRequestDto.getIncomeCategoryName())
+                .orElseThrow(() -> new RuntimeException("Income Category not found with name: " + incomeRequestDto.getIncomeCategoryName()));
+
+        // Ensure that the category belongs to the user
+        if (!incomeCategory.getUser().getUsername().equals(username)) {
+            throw new RuntimeException("You have not this category.");
+        }
+
+        // Update the expense details
+        existingIncome.setAmount(incomeRequestDto.getAmount());
+        existingIncome.setName(incomeRequestDto.getName());
+        existingIncome.setDate(incomeRequestDto.getDate());
+        existingIncome.setIncomeCategory(incomeCategory);
+
+        // Save the updated expense
+        Income updatedIncome = incomeRepository.save(existingIncome);
+
+        // Return the updated ExpenseResponseDto
         return incomeMapper.toIncomeResponseDto(updatedIncome);
     }
 
