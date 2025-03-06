@@ -21,4 +21,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, Long> {
     boolean existsByUserAndName(User user, String name);
 
     boolean existsByUserAndExpenseCategory(User user, ExpenseCategory expenseCategory);
+
+    List<Expense> findByUserUsernameAndDateBetween(String username, LocalDate startDate, LocalDate endDate);
 }

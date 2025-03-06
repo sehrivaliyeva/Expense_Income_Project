@@ -1,5 +1,6 @@
 package project.expenseincomeproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,9 +43,8 @@ public class User implements UserDetails {
     private Double balance;
 
 
-
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<IncomeCategory> incomeCategories;
 
 

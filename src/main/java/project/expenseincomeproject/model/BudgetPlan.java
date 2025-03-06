@@ -1,5 +1,7 @@
 package project.expenseincomeproject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,8 +21,6 @@ import java.util.List;
 @Entity
 @Table(name = "budget_plans")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class BudgetPlan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,11 @@ public class BudgetPlan {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    @JsonBackReference
     private User user;
 
+    @Column(nullable = false)
     private Double plannedAmount;
 
     @Column(nullable = false)
@@ -38,10 +41,8 @@ public class BudgetPlan {
     @Column(nullable = false)
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "budgetPlan")
-    private List<Expense> expenses;
-
-    private Double totalExpenses; // Bu planın altında sərf edilən ümumi məbləğ
+    @Column(nullable = false)
+    private String status; // "Positive" or "Negative"
 
 }
 
