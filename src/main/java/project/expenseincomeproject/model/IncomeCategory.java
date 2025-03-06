@@ -1,7 +1,6 @@
 package project.expenseincomeproject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +13,7 @@ import lombok.Data;
 @Entity
 @Table(name = "incomecategories")
 @Data
-public class IncomeCategory {
+public class IncomeCategory { ///maas,shexsi biznes , teqaud elaci, prazi
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

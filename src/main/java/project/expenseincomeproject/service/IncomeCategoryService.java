@@ -37,7 +37,6 @@ public class IncomeCategoryService {
 
         // Cari istifadəçinin username-ni əldə edirik
         String username = authentication.getName();
-
         // Request DTO-dan gələn username ilə müqayisə edirik
         if (!username.equals(categoryRequestDto.getUsername())) {
             throw new RuntimeException("Usernames do not match. Only the authenticated user can add categories.");
@@ -67,6 +66,7 @@ public class IncomeCategoryService {
         // IncomeCategory response DTO-ya çeviririk
         return incomeCategoryMapper.toIncomeCategoryResponseDto(incomeCategory);
     }
+
 
 
     // Bütün IncomeCategory-ləri əldə etmək üçün, yalnız istifadəçinin məlumatları

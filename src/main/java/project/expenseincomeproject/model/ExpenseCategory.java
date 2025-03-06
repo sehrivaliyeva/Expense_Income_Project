@@ -14,7 +14,7 @@ import lombok.Data;
 @Entity
 @Table(name = "expensecategories")
 @Data
-public class ExpenseCategory {
+public class ExpenseCategory { /// komunal -- su, isiq, kiraye  , neqliyyat -- benzin, metro,avtobus
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

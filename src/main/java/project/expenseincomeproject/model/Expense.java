@@ -29,6 +29,7 @@ public class Expense {
     @Column(nullable = false)
     private LocalDate date;
 
+
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private ExpenseCategory expenseCategory;
@@ -36,6 +37,7 @@ public class Expense {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 
     @ManyToOne
     @JoinColumn(name="budgetPlan_id")

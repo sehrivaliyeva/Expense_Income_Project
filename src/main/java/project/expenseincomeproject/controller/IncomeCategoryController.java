@@ -23,7 +23,7 @@ public class IncomeCategoryController {
 
     private final IncomeCategoryService incomeCategoryService;
 
-   @PostMapping("/add")
+   @PostMapping("/add") ///void
    public ResponseEntity<IncomeCategoryResponseDto> createCategory(@RequestBody IncomeCategoryRequestDto requestDto) {
        return ResponseEntity.ok(incomeCategoryService.save(requestDto));
    }

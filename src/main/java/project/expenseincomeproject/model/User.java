@@ -34,6 +34,7 @@ public class User implements UserDetails {
     @Column(unique = true)
     private String username;
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -41,8 +42,11 @@ public class User implements UserDetails {
     private Double balance;
 
 
+
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<IncomeCategory> incomeCategories;
+
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ExpenseCategory> expenseCategories;
@@ -52,6 +56,7 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Expense> expenses;
+
 
 
     @Override

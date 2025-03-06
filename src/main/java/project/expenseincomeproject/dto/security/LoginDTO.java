@@ -12,4 +12,5 @@ public class LoginDTO {
 
     @NotBlank(message = "Password must not be blank")
     private String password;
+    /// sayta login olarken bu classdan istifade edecik
 }

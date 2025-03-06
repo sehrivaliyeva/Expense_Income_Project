@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import project.expenseincomeproject.model.IncomeCategory;
 
 @Getter
 @Setter

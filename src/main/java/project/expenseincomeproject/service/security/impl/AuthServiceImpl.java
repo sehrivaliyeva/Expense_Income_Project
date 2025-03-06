@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtServiceImpl jwtService;
     private final AuthenticationManager authenticationManager;
 
-
+    /// herbir register olan usere biz ozumuz default olaraq rolunu USER teyin edirik
     @Override
     public AuthResponse register(RegisterDTO request) {
         User user = new User();

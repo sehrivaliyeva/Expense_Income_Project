@@ -22,6 +22,7 @@ public class IncomeCategoryMapper {
     private final UserRepository userRepository;
     private final IncomeCategoryRepository incomeCategoryRepository;
 
+
     public IncomeCategory toIncomeCategory(IncomeCategoryRequestDto requestDto) {
         Optional<User> userOptional = userRepository.findByUsername(requestDto.getUsername());
         if (userOptional.isEmpty()) {

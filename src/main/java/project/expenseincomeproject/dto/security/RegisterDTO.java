@@ -11,4 +11,6 @@ public class RegisterDTO {
     private String username;
     @NotBlank(message = "Password must not be blank")
     private String password;
+
+    /// sayta register olarken bu classdan istifade edecik
 }

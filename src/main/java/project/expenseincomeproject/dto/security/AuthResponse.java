@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class AuthResponse {
     private String response;
+    ///sistemde register olduqdan sonra response bize bu class vasitesile qayidacag
 
 }
