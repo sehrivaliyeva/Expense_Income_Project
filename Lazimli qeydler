@@ -10,3 +10,6 @@ docker tag oscarfonts/h2:latest shahrigul/expense-income-app:h2
 docker push shahrigul/expense-income-app:h2
 
 Qeyd: bu emrler ardicilliqla olmalidir
+
+--------H2 bazasi ---------
+localhost:8082 ile run edecik browserde
