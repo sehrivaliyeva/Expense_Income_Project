@@ -1,5 +1,6 @@
 package project.expenseincomeproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,10 +16,12 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "incomes")
 @Data
-public class Income { /// premya  50.30.20 ve s
+public class Income {
+    /// premya  50.30.20 ve s
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     private String name;

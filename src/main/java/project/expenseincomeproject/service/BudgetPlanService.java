@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import project.expenseincomeproject.ExpenseIncomeProjectApplication;
 import project.expenseincomeproject.model.BudgetPlan;
 import project.expenseincomeproject.model.Expense;
 import project.expenseincomeproject.model.Income;
@@ -30,6 +31,7 @@ public class BudgetPlanService {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
+
     public String createBudgetPlan(LocalDate startDate, LocalDate endDate, double plannedAmount) {
         User user = getAuthenticatedUser();
 
@@ -57,8 +59,6 @@ public class BudgetPlanService {
 
     public String evaluateBudgetPlan(Long budgetPlanId) {
         User user = getAuthenticatedUser();
-
-        // Planı tapırıq və istifadəçinin olub-olmadığını yoxlayırıq
         BudgetPlan budgetPlan = budgetPlanRepository.findById(budgetPlanId)
                 .orElseThrow(() -> new IllegalArgumentException("Budget plan not found!"));
 
@@ -86,10 +86,12 @@ public class BudgetPlanService {
                 "Negative: Your spending rate is higher than your plan. Consider adjusting expenses." :
                 "Positive: Your plan is within your estimated spending. Keep it up!";
     }
+
     public List<BudgetPlan> getUserBudgetPlans() {
         User user = getAuthenticatedUser();
         return budgetPlanRepository.findByUser(user);
     }
+
     public String deleteBudgetPlan(Long budgetPlanId) {
         User user = getAuthenticatedUser();
 
@@ -104,5 +106,7 @@ public class BudgetPlanService {
 
         return "Budget plan successfully deleted!";
     }
+   // ExpenseIncomeProject-0.0.1-SNAPSHOT.jar
+    //ExpenseIncomeProject-0.0.1-SNAPSHOT-plain.jar
 
 }

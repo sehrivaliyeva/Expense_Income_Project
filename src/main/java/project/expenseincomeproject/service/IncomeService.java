@@ -79,16 +79,16 @@ public class IncomeService {
 
         // Check if the logged-in user is authorized to update the expense
         if (!username.equals(incomeRequestDto.getUserName())) {
-            throw new RuntimeException("You are not authorized to update expense for this user.");
+            throw new RuntimeException("You are not authorized to update income for this user.");
         }
 
         // Retrieve the existing expense by its ID
         Income existingIncome = incomeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Expense not found with id: " + id));
+                .orElseThrow(() -> new RuntimeException("Income not found with id: " + id));
 
         // Check if the logged-in user is the owner of the existing expense
         if (!existingIncome.getUser().getUsername().equals(username)) {
-            throw new RuntimeException("You are not authorized to update this expense.");
+            throw new RuntimeException("You are not authorized to update this income.");
         }
 
         // Fetch the ExpenseCategory from the repository

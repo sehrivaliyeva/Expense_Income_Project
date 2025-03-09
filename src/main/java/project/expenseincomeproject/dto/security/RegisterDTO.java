@@ -14,3 +14,5 @@ public class RegisterDTO {
 
     /// sayta register olarken bu classdan istifade edecik
 }
+///expense-income-app-plan.jar
+///ExpenseIncomeProject-0.0.1-SNAPSHOT.jar

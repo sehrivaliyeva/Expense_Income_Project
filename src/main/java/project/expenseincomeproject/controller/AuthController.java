@@ -18,6 +18,7 @@ import project.expenseincomeproject.service.security.AuthService;
 public class AuthController {
 
     private final AuthService authService;
+
     @PostMapping("/register")
     public ResponseEntity<AuthResponse> register(@RequestBody RegisterDTO request) {
         AuthResponse response = authService.register(request);

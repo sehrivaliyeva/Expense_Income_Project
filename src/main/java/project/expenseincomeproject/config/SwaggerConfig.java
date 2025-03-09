@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
         security = {@SecurityRequirement(name = "bearerToken")},
         externalDocs = @ExternalDocumentation(
                 description = "Access the full API documentation",
-                url = "http://localhost:8181/swagger-ui/index.html"
+                url = "http://localhost:8080/swagger-ui/index.html"
         )
 )
 @SecuritySchemes({

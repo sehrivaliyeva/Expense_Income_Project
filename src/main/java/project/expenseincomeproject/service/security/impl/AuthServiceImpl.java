@@ -61,5 +61,7 @@ public class AuthServiceImpl implements AuthService {
 
         return new AuthResponse(accessToken);
     }
+    ///expense-income-app-plain.jar
+    ///ExpenseIncomeProject-0.0.1-SNAPSHOT.jar
 
 }

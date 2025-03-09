@@ -42,7 +42,7 @@ public class BudgetPlan {
     private LocalDate endDate;
 
     @Column(nullable = false)
-    private String status; // "Positive" or "Negative"
+    private String status;
 
 }
 

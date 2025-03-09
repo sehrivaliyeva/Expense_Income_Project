@@ -19,11 +19,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
-//@RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
 
-    private static String JWT_SECRET_KEY ="3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
+    private static String JWT_SECRET_KEY = "3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
     private static int JWT_EXPIRATION_TIME = 3600000;
 
 
@@ -50,6 +49,7 @@ public class JwtServiceImpl implements JwtService {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
     private SecretKey getSigninKey() {
         byte[] keyBytes = Decoders.BASE64.decode(JWT_SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
@@ -57,7 +57,7 @@ public class JwtServiceImpl implements JwtService {
 
 
     @Override
-    public boolean isValid(String token, UserDetails user){
+    public boolean isValid(String token, UserDetails user) {
         String username = extractUsername(token);
         List<String> tokenRoles = getRolesFromToken(token);
         List<String> userRoles = user.getAuthorities().stream()
@@ -78,7 +78,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateToken(User user){
+    public String generateToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getId());
         claims.put("roles", user.getAuthorities().stream()

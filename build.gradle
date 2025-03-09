@@ -18,6 +18,19 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+jar {
+    archiveBaseName.set("expense-income-app")
+    archiveVersion.set("")
+}
+jar {
+    manifest {
+        attributes 'ExpenseIncomeProjectApplication-Class': 'com.example.ExpenseIncomeProjectApplication'
+    }
+}
+
+
+
+
 
 repositories {
     mavenCentral()
@@ -30,9 +43,9 @@ dependencies {
 
     compileOnly 'org.projectlombok:lombok'
 
-    runtimeOnly 'com.mysql:mysql-connector-j'
+    // runtimeOnly 'com.mysql:mysql-connector-j'
 
-    //implementation 'com.h2database:h2'
+    runtimeOnly 'com.h2database:h2'
 
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:+'

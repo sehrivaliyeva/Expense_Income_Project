@@ -1,7 +1,6 @@
 package project.expenseincomeproject.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -13,7 +12,6 @@ import project.expenseincomeproject.model.ExpenseCategory;
 import project.expenseincomeproject.model.User;
 import project.expenseincomeproject.repository.ExpenseCategoryRepository;
 import project.expenseincomeproject.repository.UserRepository;
-
 
 import java.util.List;
 import java.util.Optional;

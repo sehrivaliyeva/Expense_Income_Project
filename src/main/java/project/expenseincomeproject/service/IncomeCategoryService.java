@@ -27,10 +27,8 @@ public class IncomeCategoryService {
 
     // IncomeCategory əlavə etmək üçün
     public IncomeCategoryResponseDto save(IncomeCategoryRequestDto categoryRequestDto) {
-        // Giriş etmiş istifadəçinin authentication məlumatlarını alırıq
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        // Authentication null ola bilər, ona görə yoxlama edirik
         if (authentication == null || !authentication.isAuthenticated()) {
             throw new RuntimeException("User is not authenticated. Please log in first.");
         }
@@ -102,6 +100,7 @@ public class IncomeCategoryService {
         User user = userRepository.findByUsername(currentUsername)
                 .orElseThrow(() -> new UserNotFoundException("User not found with username: " + currentUsername));
 
+
         IncomeCategory incomeCategory = incomeCategoryRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("IncomeCategory not found with id: " + id));
 
@@ -110,6 +109,7 @@ public class IncomeCategoryService {
             throw new RuntimeException("IncomeCategory is not owned by the current user");
         }
 
+
         // Yeni ad təyin edilir və yenilənmiş məlumat bazaya yazılır
         incomeCategory.setIncomeCategoryName(categoryRequestDto.getCategoryName());
         incomeCategory.setUser(user);
@@ -117,6 +117,9 @@ public class IncomeCategoryService {
 
         return incomeCategoryMapper.toIncomeCategoryResponseDto(incomeCategory);
     }
+
+
+
     // IncomeCategory silmək üçün
     public void delete(Long id) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -44,6 +44,7 @@ public class IncomeController {
         return ResponseEntity.noContent().build();
     }
 
+
     @GetMapping("/category-and-date-range/{categoryName}")
     public ResponseEntity<List<IncomeResponseDto>> getIncomesByCategoryAndDateRange(
             @PathVariable String categoryName,
