@@ -23,7 +23,7 @@ public class JwtServiceImpl implements JwtService {
 
 
     private static String JWT_SECRET_KEY = "3cfa76ef14937c1c0ea519f8fc057a80fcd04a7420f8e8bcd0a7567c272e007b";
-    private static int JWT_EXPIRATION_TIME = 3600000;
+    private static int JWT_EXPIRATION_TIME = 21600000;
 
 
     @Override

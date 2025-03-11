@@ -16,6 +16,7 @@ import project.expenseincomeproject.repository.UserRepository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,12 @@ public class BudgetPlanService {
 
     public String createBudgetPlan(LocalDate startDate, LocalDate endDate, double plannedAmount) {
         User user = getAuthenticatedUser();
+
+        // Mövcud büdcə planını yoxla
+        Optional<BudgetPlan> existingPlan = budgetPlanRepository.findByUserUsernameAndStartDateAndEndDate(user.getUsername(), startDate, endDate);
+        if (existingPlan.isPresent()) {
+            return "Error: A budget plan for this period already exists!";
+        }
 
         List<Income> incomes = incomeRepository.findByUserUsernameAndDateBetween(user.getUsername(), startDate, endDate);
         double totalIncome = incomes.stream().mapToDouble(Income::getAmount).sum();

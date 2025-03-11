@@ -39,8 +39,5 @@ public class Expense {
     private User user;
 
 
-    @ManyToOne
-    @JoinColumn(name="budgetPlan_id")
-    BudgetPlan budgetPlan;
 
 }
